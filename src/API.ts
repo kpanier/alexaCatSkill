@@ -60,8 +60,8 @@ export class API {
         }
     }
 
-    dispatchIntent(intent: string): ResponseBody {
-        switch (intent) {
+    dispatchIntent(intent: any): ResponseBody {
+        switch (intent.name) {
             case 'futter':
                 return this.getMjamMjam();
             case 'kuschel':
