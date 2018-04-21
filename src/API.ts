@@ -51,7 +51,7 @@ export class API {
                     break;
                 case 'IntentRequest':
                     response.status(200);
-                    result = this.dispatchIntent(alexaReq.requst.intent);
+                    result = this.dispatchIntent(alexaReq.request.intent);
                     break;
                 default:
                     response.status(200);
