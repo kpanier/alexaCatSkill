@@ -39,6 +39,7 @@ export class API {
 
     createAlexaEndpoint(): any {
         return (request, response) => {
+            console.log(request.body);
             let alexaReq = JSON.parse(request.body)
             console.log(alexaReq);
             let reqType = alexaReq.request.type;
