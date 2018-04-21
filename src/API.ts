@@ -57,8 +57,8 @@ export class API {
     }
 
     getHelloResponse(): ResponseBody {
-        let speech: OutputSpeech = {text: "Hallo von Kater Lee", type: "PlainText"};
-        let res: Response = {outputSpeech: speech};
+        let speech: OutputSpeech = { text: "Hallo von Kater Lee", type: "PlainText" };
+        let res: Response = { outputSpeech: speech, shouldEndSession: false };
         return {
             version: "1.0",
             response: res
