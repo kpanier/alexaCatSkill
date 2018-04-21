@@ -68,9 +68,20 @@ export class API {
                 return this.getSchnurr();
             case 'bauchen':
                 return this.getKralleKrawallo();
+            case 'AMAZON.StopIntent':
+                return this.getStop();
             default:
                 return this.getUnknown();
         }
+    }
+
+    getStop(): ResponseBody {
+        let speech: OutputSpeech = { text: 'Zeit zu schlafen. Bis zum nächsten mal.', type: "PlainText" };
+        let res: Response = { outputSpeech: speech, shouldEndSession: true };
+        return {
+            version: "1.0",
+            response: res
+        }        
     }
 
     getKralleKrawallo(): ResponseBody {
@@ -82,7 +93,7 @@ export class API {
     }
 
     getSchnurr(): ResponseBody {
-        return this.getReponseBody('Miau. Brrr Brrr Brrr. Das mag ich');
+        return this.getReponseBody('Miau. Schnurr Pühh Schnurr Pühh Schnurr. Das mag ich');
     }
 
     getHelloResponse(): ResponseBody {
