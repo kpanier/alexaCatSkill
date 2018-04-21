@@ -51,7 +51,7 @@ export class API {
                     break;
                 case 'IntentRequest':
                     response.status(200);
-                    result = this.getMjamMjam();
+                    result = this.dispatchIntent(alexaReq.requst.intent);
                     break;
                 default:
                     response.status(200);
@@ -60,22 +60,45 @@ export class API {
         }
     }
 
-    getHelloResponse(): ResponseBody {
-        let speech: OutputSpeech = { text: "Hallo von Kater Lee", type: "PlainText" };
-        let res: Response = { outputSpeech: speech, shouldEndSession: false };
-        return {
-            version: "1.0",
-            response: res
+    dispatchIntent(intent: string): ResponseBody {
+        switch (intent) {
+            case 'futter':
+                return this.getMjamMjam();
+            case 'kuschel':
+                return this.getSchnurr();
+            case 'bauchen':
+                return this.getKralleKrawallo();
+            default:
+                return this.getUnknown();
         }
+    }
+
+    getKralleKrawallo(): ResponseBody {
+        return this.getReponseBody('Meine Vorder pfoten packen dich. Meine Zähne knappern an dir und meine Hinterpfoten boxen dich. Kralle krawallo oder das Kängeruh.');
+    }
+
+    getUnknown(): ResponseBody {
+        return this.getReponseBody('Miau. Das verstehe ich nicht.');
+    }
+
+    getSchnurr(): ResponseBody {
+        return this.getReponseBody('Miau. Brrr Brrr Brrr. Das mag ich');
+    }
+
+    getHelloResponse(): ResponseBody {
+        return this.getReponseBody('Hallo von Kater Lee');
     }
 
     getMjamMjam(): ResponseBody {
-        let speech: OutputSpeech = { text: "Ich der Kater Lee danke Dir für das viele Futter. Meine Höcker frohlocken und wachsen weiter. ", type: "PlainText" };
+        return this.getReponseBody('Ich der Kater Lee danke Dir für das viele Futter. Meine Höcker frohlocken und wachsen weiter.');
+    }
+
+    getReponseBody(message: string): ResponseBody {
+        let speech: OutputSpeech = { text: message, type: "PlainText" };
         let res: Response = { outputSpeech: speech, shouldEndSession: false };
         return {
             version: "1.0",
             response: res
         }
     }
-
 }
