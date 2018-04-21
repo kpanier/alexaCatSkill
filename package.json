@@ -1,0 +1,49 @@
+{
+  "name": "alexa-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha -u tdd -r ts-node/register src/**/*.test.ts",
+    "tsc": "tsc --watch",
+    "build": "tsc",
+    "serve": "nodemon dist/index.js",
+    "prod": "pm2-runtime  dist/index.js"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.test.ts",
+      "**/*.js"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "all": true
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^9.4.7",
+    "mocha": "^5.0.4",
+    "nyc": "^11.4.1",
+    "ts-node": "^5.0.1",
+    "typemoq": "^2.1.0",
+    "typescript": "~2.7.2"
+  },
+  "dependencies": {
+    "ask-sdk": "^2.0.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "hal": "^1.2.0",
+    "jsonwebtoken": "^8.1.0",
+    "multer": "^1.3.0",
+    "nodemon": "^1.11.0",
+    "pm2": "^2.10.2"
+  }
+}
