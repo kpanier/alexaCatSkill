@@ -49,6 +49,10 @@ export class API {
                     response.status(200);
                     result = this.getHelloResponse();
                     break;
+                case 'IntentRequest':
+                    response.status(200);
+                    result = this.getMjamMjam();
+                    break;
                 default:
                     response.status(200);
             }
@@ -58,6 +62,15 @@ export class API {
 
     getHelloResponse(): ResponseBody {
         let speech: OutputSpeech = { text: "Hallo von Kater Lee", type: "PlainText" };
+        let res: Response = { outputSpeech: speech, shouldEndSession: false };
+        return {
+            version: "1.0",
+            response: res
+        }
+    }
+
+    getMjamMjam(): ResponseBody {
+        let speech: OutputSpeech = { text: "Ich der Kater Lee danke Dir für das viele Futter. Meine Höcker frohlocken und wachsen weiter. ", type: "PlainText" };
         let res: Response = { outputSpeech: speech, shouldEndSession: false };
         return {
             version: "1.0",
