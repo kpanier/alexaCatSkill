@@ -1,6 +1,7 @@
 import express = require('express');
 import { ResponseBody, OutputSpeech } from 'alexa-sdk';
 import { Response, Session } from 'alexa-sdk';
+import { SIHandler } from './SIHandler';
 
 export class API {
 
@@ -11,6 +12,7 @@ export class API {
         this.configureServer()
         this.server.get('/', this.createHelloMessageEndpoint());
         this.server.post('/alexa', this.createAlexaEndpoint());
+        this.server.post('/si', new SIHandler().createAlexaEndpoint());
         this.launchHttpServer();
     }
 
