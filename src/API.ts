@@ -78,8 +78,8 @@ export class API {
     }
 
     getBedarfReaction(slots) {
-        console.log(slots[0]);
-        return this.getReponseBody('Was soll ich der kater mit '+ slots[0] + ' Ich will steak, sonst gibts kraewallo');
+        console.log(slots);
+        return this.getReponseBody('Was soll ich der kater mit '+ slots.art.value + '. Ich will steak, sonst gibts krawallo');
     }
 
     getStop(): ResponseBody {
