@@ -68,11 +68,18 @@ export class API {
                 return this.getSchnurr();
             case 'bauchen':
                 return this.getKralleKrawallo();
+            case 'bedarf':
+                return this.getBedarfReaction(intent.slots);
             case 'AMAZON.StopIntent':
                 return this.getStop();
             default:
                 return this.getUnknown();
         }
+    }
+
+    getBedarfReaction(slots) {
+        console.log(slots[0]);
+        return this.getReponseBody('Was soll ich der kater mit '+ slots[0] + ' Ich will steak, sonst gibts kraewallo');
     }
 
     getStop(): ResponseBody {
