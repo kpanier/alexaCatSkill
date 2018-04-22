@@ -1,10 +1,11 @@
 import express = require('express');
 import { ResponseBody, OutputSpeech } from 'alexa-sdk';
-import { Response } from 'alexa-sdk';
+import { Response, Session } from 'alexa-sdk';
 
 export class API {
 
     private server = express();
+    userContacts: Map<string, number>;
 
     startServer(): any {
         this.configureServer()
@@ -43,6 +44,7 @@ export class API {
             console.log(alexaReq);
             let reqType = alexaReq.request.type;
             console.log(reqType)
+            this.storeUser(alexaReq.session);
             let result = {};
             switch (reqType) {
                 case 'LaunchRequest':
@@ -58,6 +60,17 @@ export class API {
             }
             response.send(result);
         }
+    }
+
+    storeUser(session: Session) {
+        if (this.userContacts.get(session.user.userId)) {
+            this.userContacts.set(session.user.userId, this.userContacts.get(session.user.userId) + 1);
+        }
+        else {
+            this.userContacts.set(session.user.userId, 1);
+        }
+        console.log('Users: ' + this.userContacts.size);
+        console.log('User: ' + session.user.userId + ' visits: ' + this.userContacts.get(session.user.userId));
     }
 
     dispatchIntent(intent: any): ResponseBody {
@@ -78,8 +91,10 @@ export class API {
     }
 
     getBedarfReaction(slots) {
-        console.log(slots);
-        return this.getReponseBody('Was soll ich der kater mit '+ slots.art.value + '. Ich will steak, sonst gibts krawallo');
+        if (slots.art.value.toLowerCase() === 'steak')
+            return this.getReponseBody('Br Mjam Br Mjam');
+        else
+            return this.getReponseBody('Was soll ich der kater mit ' + slots.art.value + '. Ich will steak, sonst gibts krawallo');
     }
 
     getStop(): ResponseBody {
@@ -88,7 +103,7 @@ export class API {
         return {
             version: "1.0",
             response: res
-        }        
+        }
     }
 
     getKralleKrawallo(): ResponseBody {
