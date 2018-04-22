@@ -5,7 +5,7 @@ import { Response, Session } from 'alexa-sdk';
 export class API {
 
     private server = express();
-    userContacts: Map<string, number>;
+    userContacts: Map<string, number> = new Map();
 
     startServer(): any {
         this.configureServer()
